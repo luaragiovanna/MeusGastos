@@ -14,10 +14,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+
 @Entity
 public class Titulo {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTitulo")
     private Long id;
     @Column(nullable = false)
@@ -27,17 +28,19 @@ public class Titulo {
     private Usuario usuario;
     private ETipoTitulo tipo;
     @ManyToMany
-    @JoinTable( //id dela e depois id do titulo eo inversejoin vai ter o id centro de custos
-        name = "titulo_centrodecusto",
+    @JoinTable(
+        name="titulo_centrodecusto",
         joinColumns = @JoinColumn(name="idTitulo"),
         inverseJoinColumns = @JoinColumn(name="idCentroDeCusto")
     )
     private List<CentroDeCusto> centrosDeCustos;
+    @Column(nullable = false)
     private Double valor;
     private Date dataCadastro;
     private Date dataReferencia;
     private Date dataVencimento;
     private Date dataPagamento;
+    @Column(columnDefinition = "TEXT")
     private String observacao;
 
     public Long getId() {
@@ -64,10 +67,10 @@ public class Titulo {
     public void setTipo(ETipoTitulo tipo) {
         this.tipo = tipo;
     }
-    public List<CentroDeCusto> getCentroDeCustos() {
+    public List<CentroDeCusto> getCentrosDeCustos() {
         return centrosDeCustos;
     }
-    public void setCentroDeCustos(List<CentroDeCusto> centrosDeCustos) {
+    public void setCentrosDeCustos(List<CentroDeCusto> centrosDeCustos) {
         this.centrosDeCustos = centrosDeCustos;
     }
     public Double getValor() {
@@ -107,6 +110,6 @@ public class Titulo {
         this.observacao = observacao;
     }
 
-
     
 }
+

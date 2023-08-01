@@ -20,6 +20,8 @@ import com.example.meusgastos.domain.dto.usuario.UsuarioResponseDTO;
 import com.example.meusgastos.domain.service.UsuarioService;
 @CrossOrigin("*")  //p insominia
 @RestController //da get push  delete
+
+
 @RequestMapping("/api/usuarios") //caminho
 public class UsuarioController {
     //chama as coisas da service
@@ -28,28 +30,24 @@ public class UsuarioController {
 
     //retorna lista de usuario response
     @GetMapping //metodo de get 
-    public ResponseEntity<List<UsuarioResponseDTO>> 
-    obterTodos(){ //so pega caminho
+    public ResponseEntity<List<UsuarioResponseDTO>>  obterTodos(){ //so pega caminho
         return ResponseEntity.ok(usuairService.obterTodos());
      }
 
     //via url 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO>
-    obterPorId(@PathVariable Long id){
+    public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable Long id){
         return ResponseEntity.ok(usuairService.obterPorId(id));
     }
 
     //via json 
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO>
-    cadastrar(@RequestBody UsuarioRequestDTO dto){
+    public ResponseEntity<UsuarioResponseDTO> cadastrar(@RequestBody UsuarioRequestDTO dto){
         UsuarioResponseDTO usuario = usuairService.cadastrar(dto);
         return new ResponseEntity<UsuarioResponseDTO>(usuario, HttpStatus.CREATED); //usuario foi criado
     }
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO>
-    atualizar(@PathVariable Long id, @RequestBody UsuarioRequestDTO dto){
+    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable Long id, @RequestBody UsuarioRequestDTO dto){
          UsuarioResponseDTO usuario = usuairService.atualizar(id, dto);
          return new ResponseEntity<UsuarioResponseDTO>(usuario, HttpStatus.OK); //usuario foi criado
     }
